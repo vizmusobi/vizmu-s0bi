@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>VIZMU SOBI</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
@@ -218,7 +218,7 @@
         .modal-content, .cart-modal-content {
             background: #000;
             border: 2px solid #FFF;
-            padding: 25px;
+            padding: 20px;
             width: 380px;
             max-width: 90%;
             max-height: 85vh;
@@ -252,6 +252,7 @@
             width: 100%;
             margin-top: 10px;
             cursor: pointer;
+            font-size: 13px;
         }
         .checkout-btn:hover, #submitButton:hover {
             background: #FFF;
@@ -263,6 +264,7 @@
             font-size: 20px;
             color: #FFF;
             cursor: pointer;
+            transition: transform 0.2s;
         }
         .close:hover { transform: rotate(90deg); }
         select, input {
@@ -285,19 +287,53 @@
             margin: -3px 0 6px;
             display: none;
         }
+        /* Адаптивность для телефонов */
         @media (max-width: 768px) {
-            .title { font-size: 36px; }
-            .sidebar { width: 180px; }
+            .title { font-size: 32px; margin-top: 10px; }
+            .main-container { margin-top: 60px; }
+            .sidebar { width: 160px; padding: 10px; }
+            .category-btn { font-size: 12px; padding: 8px; }
             .product-card { width: 140px; height: 240px; }
             .product-image { height: 100px; }
-            .main-container { margin-top: 70px; }
+            .product-info h3 { font-size: 12px; height: 32px; }
+            .add-to-cart { font-size: 10px; padding: 5px 12px; }
+            .cart-summary { font-size: 12px; margin: 10px; padding: 8px; }
+            .cart-btn { font-size: 11px; padding: 5px 12px; }
+            .modal-content, .cart-modal-content { padding: 15px; width: 90%; max-width: 340px; }
+            .cart-item { font-size: 12px; }
+            .cart-total { font-size: 14px; }
+            .checkout-btn, #submitButton { font-size: 12px; padding: 8px; }
+            select, input { font-size: 12px; padding: 6px; }
         }
         @media (max-width: 480px) {
-            .title { font-size: 28px; }
-            .main-container { flex-direction: column; margin-top: 60px; }
-            .sidebar { width: 100%; flex-direction: row; overflow-x: auto; padding: 10px; }
-            .category-btn { font-size: 11px; padding: 8px; }
-            .product-card { width: 220px; }
+            .title { font-size: 24px; margin-top: 5px; }
+            .main-container { flex-direction: column; margin-top: 50px; }
+            .sidebar {
+                width: 100%;
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 8px;
+                justify-content: flex-start;
+                gap: 6px;
+            }
+            .category-btn { font-size: 11px; padding: 6px 10px; min-width: 100px; }
+            .category-btn img { width: 16px; height: 16px; }
+            .product-panel { padding: 8px; gap: 10px; justify-content: center; }
+            .product-card { width: 160px; height: 220px; }
+            .product-image { height: 90px; }
+            .product-info h3 { font-size: 11px; height: 30px; }
+            .product-info p { font-size: 11px; }
+            .add-to-cart { font-size: 10px; padding: 5px 10px; }
+            .cart-summary { font-size: 11px; margin: 8px; padding: 6px; }
+            .cart-btn { font-size: 10px; padding: 4px 10px; }
+            .cart-count { width: 16px; height: 16px; font-size: 9px; }
+            .modal-content, .cart-modal-content { padding: 12px; width: 95%; max-width: 300px; }
+            .cart-item { font-size: 11px; }
+            .cart-total { font-size: 13px; }
+            .checkout-btn, #submitButton { font-size: 11px; padding: 6px; }
+            select, input { font-size: 11px; padding: 5px; }
+            .error-message { font-size: 10px; }
+            .close { font-size: 18px; top: 8px; right: 12px; }
         }
     </style>
 </head>
@@ -323,7 +359,7 @@
                     <div class="product-info">
                         <h3>Сорочка біла, Primark</h3>
                         <p>Ціна: 300 грн</p>
-                        <button class="add-to-cart" onclick="addToCart({&quot;name&quot;:&quot;Сорочка біла, Primark&quot;,&quot;price&quot;:300,&quot;image&quot;:&quot;https://i.postimg.cc/xT2TB5sw/de.webp&quot;,&quot;category&quot;:&quot;Пончо&quot;})">ДОДАТИ</button>
+                        <button class="add-to-cart" onclick="addToCart({&quot; name&quot; :&quot; Сорочка біла, Primark&quot; ,&quot; price&quot; :300,&quot; image&quot; :&quot; https://i.postimg.cc/xT2TB5sw/de.webp&quot; ,&quot; category&quot; :&quot; Пончо&quot; })">ДОДАТИ</button>
                     </div>
                 </div>
                 <div class="product-card">
@@ -331,7 +367,7 @@
                     <div class="product-info">
                         <h3>Кофта чоловіча, XL</h3>
                         <p>Ціна: 299 грн</p>
-                        <button class="add-to-cart" onclick="addToCart({&quot;name&quot;:&quot;Кофта чоловіча, XL&quot;,&quot;price&quot;:299,&quot;image&quot;:&quot;https://i.postimg.cc/Zqd51QSz/3dwed.webp&quot;,&quot;category&quot;:&quot;Кофти&quot;})">ДОДАТИ</button>
+                        <button class="add-to-cart" onclick="addToCart({&quot; name&quot; :&quot; Кофта чоловіча, XL&quot; ,&quot; price&quot; :299,&quot; image&quot; :&quot; https://i.postimg.cc/Zqd51QSz/3dwed.webp&quot; ,&quot; category&quot; :&quot; Кофти&quot; })">ДОДАТИ</button>
                     </div>
                 </div>
                 <div class="product-card">
@@ -339,7 +375,7 @@
                     <div class="product-info">
                         <h3>Джинси на хлопчика 10-11 років</h3>
                         <p>Ціна: 315 грн</p>
-                        <button class="add-to-cart" onclick="addToCart({&quot;name&quot;:&quot;Джинси на хлопчика 10-11 років&quot;,&quot;price&quot;:315,&quot;image&quot;:&quot;https://i.postimg.cc/8cPDPKq6/dd.webp&quot;,&quot;category&quot;:&quot;Штани&quot;})">ДОДАТИ</button>
+                        <button class="add-to-cart" onclick="addToCart({&quot; name&quot; :&quot; Джинси на хлопчика 10-11 років&quot; ,&quot; price&quot; :315,&quot; image&quot; :&quot; https://i.postimg.cc/8cPDPKq6/dd.webp&quot; ,&quot; category&quot; :&quot; Штани&quot; })">ДОДАТИ</button>
                     </div>
                 </div>
                 <div class="product-card">
@@ -347,7 +383,7 @@
                     <div class="product-info">
                         <h3>Спідниця-шорти на дівчинку 8-9 років</h3>
                         <p>Ціна: 199 грн</p>
-                        <button class="add-to-cart" onclick="addToCart({&quot;name&quot;:&quot;Спідниця-шорти на дівчинку 8-9 років&quot;,&quot;price&quot;:199,&quot;image&quot;:&quot;https://i.postimg.cc/kMhLbgSw/ee.webp&quot;,&quot;category&quot;:&quot;Пончо&quot;})">ДОДАТИ</button>
+                        <button class="add-to-cart" onclick="addToCart({&quot; name&quot; :&quot; Спідниця-шорти на дівчинку 8-9 років&quot; ,&quot; price&quot; :199,&quot; image&quot; :&quot; https://i.postimg.cc/kMhLbgSw/ee.webp&quot; ,&quot; category&quot; :&quot; Пончо&quot; })">ДОДАТИ</button>
                     </div>
                 </div>
                 <div class="product-card">
@@ -355,7 +391,7 @@
                     <div class="product-info">
                         <h3>Кофта на хлопчика 10-11 років</h3>
                         <p>Ціна: 245 грн</p>
-                        <button class="add-to-cart" onclick="addToCart({&quot;name&quot;:&quot;Кофта на хлопчика 10-11 років&quot;,&quot;price&quot;:245,&quot;image&quot;:&quot;https://i.postimg.cc/BbGpxRqc/dws.webp&quot;,&quot;category&quot;:&quot;Кофти&quot;})">ДОДАТИ</button>
+                        <button class="add-to-cart" onclick="addToCart({&quot; name&quot; :&quot; Кофта на хлопчика 10-11 років&quot; ,&quot; price&quot; :245,&quot; image&quot; :&quot; https://i.postimg.cc/BbGpxRqc/dws.webp&quot; ,&quot; category&quot; :&quot; Кофти&quot; })">ДОДАТИ</button>
                     </div>
                 </div>
                 <div class="product-card">
@@ -363,7 +399,7 @@
                     <div class="product-info">
                         <h3>Зелене Одеяло</h3>
                         <p>Ціна: 760 грн</p>
-                        <button class="add-to-cart" onclick="addToCart({&quot;name&quot;:&quot;Зелене Одеяло&quot;,&quot;price&quot;:760,&quot;image&quot;:&quot;https://i.postimg.cc/LsvNkhGW/f.webp&quot;,&quot;category&quot;:&quot;Одеяла&quot;})">ДОДАТИ</button>
+                        <button class="add-to-cart" onclick="addToCart({&quot; name&quot; :&quot; Зелене Одеяло&quot; ,&quot; price&quot; :760,&quot; image&quot; :&quot; https://i.postimg.cc/LsvNkhGW/f.webp&quot; ,&quot; category&quot; :&quot; Одеяла&quot; })">ДОДАТИ</button>
                     </div>
                 </div>
             </div>
@@ -430,7 +466,7 @@
                 <input type="text" id="deliveryAddress" placeholder="Введіть адресу" aria-label="Адреса доставки">
                 <div class="error-message" id="addressError">Введіть адресу</div>
                 <input type="text" id="name" placeholder="Ім'я та прізвище" aria-label="Ім'я та прізвище">
-                <div class="error-message" id="nameError">Введіть ім'я та прізвище</div>
+                <div class="error-message" id="nameErrorteller">Введіть ім'я та прізвище</div>
                 <input type="tel" id="phone" placeholder="Телефон (+380...)" aria-label="Номер телефону">
                 <div class="error-message" id="phoneError">Формат: +380501234567</div>
                 <button type="button" id="submitButton" onclick="submitDelivery()">ВІДПРАВИТИ</button>
@@ -439,23 +475,27 @@
     </div>
     <div class="image-modal" id="imageModal">
         <div class="image-modal-content">
-            <span class="image-close" onclick="closeImageModal()">×</span>
+            <span class="close" onclick="closeImageModal()">×</span>
             <img id="fullSizeImage" src="" alt="Повне зображення">
         </div>
     </div>
     <script>
+        // Определение устройства
+        const isMobile = () => window.innerWidth <= 480 || window.matchMedia("(max-width: 480px)").matches;
+
+        // Анимация фона
         const canvas = document.getElementById('spaceCanvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         const stars = [];
-        for (let i = 0; i < 200; i++) {
+        for (let i = 0; i < (isMobile() ? 100 : 200); i++) {
             stars.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                size: Math.random() * 3 + 1,
-                speedX: (Math.random() - 0.5) * 0.5,
-                speedY: (Math.random() - 0.5) * 0.5,
+                size: Math.random() * (isMobile() ? 2 : 3) + 1,
+                speedX: (Math.random() - 0.5) * (isMobile() ? 0.3 : 0.5),
+                speedY: (Math.random() - 0.5) * (isMobile() ? 0.3 : 0.5),
                 opacity: Math.random() * 0.5 + 0.5,
                 phase: Math.random() * Math.PI * 2,
                 opacitySpeed: Math.random() * 0.02 + 0.01
@@ -484,6 +524,8 @@
             canvas.height = window.innerHeight;
         });
         animate();
+
+        // Данные о товарах
         const products = [
             { name: 'Сорочка біла, Primark', price: 300, image: 'https://i.postimg.cc/xT2TB5sw/de.webp', category: 'Пончо' },
             { name: 'Кофта чоловіча, XL', price: 299, image: 'https://i.postimg.cc/Zqd51QSz/3dwed.webp', category: 'Кофти' },
@@ -492,6 +534,8 @@
             { name: 'Кофта на хлопчика 10-11 років', price: 245, image: 'https://i.postimg.cc/BbGpxRqc/dws.webp', category: 'Кофти' },
             { name: 'Зелене Одеяло', price: 760, image: 'https://i.postimg.cc/LsvNkhGW/f.webp', category: 'Одеяла' }
         ];
+
+        // Корзина
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         function saveCart() {
             localStorage.setItem('cart', JSON.stringify(cart));
@@ -538,6 +582,8 @@
             closeCart();
             openDeliveryModal();
         }
+
+        // Рендеринг товаров
         const productPanel = document.getElementById('productPanel');
         function renderProducts(category) {
             const filtered = category === 'Всі' ? products : products.filter(p => p.category === category);
@@ -561,6 +607,8 @@
         });
         renderProducts('Всі');
         updateCartUI();
+
+        // Модальное окно изображения
         function showFullImage(url) {
             document.getElementById('fullSizeImage').src = url;
             document.getElementById('imageModal').style.display = 'flex';
@@ -568,6 +616,8 @@
         function closeImageModal() {
             document.getElementById('imageModal').style.display = 'none';
         }
+
+        // Форма доставки
         let currentOrder = [];
         function openDeliveryModal() {
             currentOrder = [...cart];
@@ -591,6 +641,8 @@
             document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
             document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
         }
+
+        // Отправка в Discord
         const WEBHOOK_URL = 'https://discord.com/api/webhooks/1422641023657705513/AdZtuDpO8fVTzm5KmQcGwYuRSvhbNztwAOgfvedHaHpEiykbGN4ARKUat5OkJAhID2XH';
         async function submitDelivery() {
             if (!validateForm()) return;
@@ -623,7 +675,8 @@
                         ...(district ? [{ name: "🏘 Район", value: district, inline: true }] : []),
                         { name: "📍 Адреса", value: address, inline: false },
                         { name: "👤 ФІО", value: name, inline: true },
-                        { name: "📱 Телефон", value: phone, inline: true }
+                        { name: "📱 Телефон", value: phone, inline: true },
+                        { name: "📱 Пристрій", value: isMobile() ? 'Мобільний' : 'ПК', inline: true }
                     ],
                     timestamp: new Date().toISOString()
                 }]
@@ -650,6 +703,8 @@
                 submitBtn.textContent = 'ВІДПРАВИТИ';
             }
         }
+
+        // Валидация формы
         function validateForm() {
             let isValid = true;
             clearErrors();
@@ -696,6 +751,8 @@
             }
             return isValid;
         }
+
+        // Обработчики для формы доставки
         document.getElementById('deliveryMethod').addEventListener('change', function() {
             const method = this.value;
             const ukrSection = document.getElementById('ukrposhtaSection');
@@ -720,8 +777,15 @@
                 districtSection.style.display = 'none';
             }
         }
+
+        // Инициализация
         window.onload = () => {
             updateCartUI();
+            if (isMobile()) {
+                document.body.classList.add('mobile');
+            } else {
+                document.body.classList.add('desktop');
+            }
         };
     </script>
 </body>
