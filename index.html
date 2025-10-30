@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VIZMU SOBI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* ========================================
-           ГЛОБАЛЬНІ СТИЛІ
-        ======================================== */
         * {
             margin: 0;
             padding: 0;
@@ -29,10 +26,6 @@
             z-index: 1;
             filter: grayscale(100%);
         }
-
-        /* ========================================
-           ЗАГОЛОВОК
-        ======================================== */
         .title {
             position: absolute;
             top: 20px;
@@ -50,10 +43,6 @@
             from { text-shadow: 0 0 10px rgba(255,255,255,0.8); }
             to { text-shadow: 0 0 20px rgba(255,255,255,1); }
         }
-
-        /* ========================================
-           КОНТЕЙНЕР
-        ======================================== */
         .main-container {
             display: flex;
             width: 100%;
@@ -62,10 +51,6 @@
             margin-top: 80px;
             position: relative;
         }
-
-        /* ========================================
-           БОКОВА ПАНЕЛЬ
-        ======================================== */
         .sidebar {
             width: 200px;
             background: rgba(0,0,0,0.9);
@@ -101,10 +86,6 @@
             width: 18px; height: 18px;
             filter: grayscale(100%) brightness(100%);
         }
-
-        /* ========================================
-           КОНТЕНТ
-        ======================================== */
         .content {
             flex: 1;
             display: flex;
@@ -145,10 +126,6 @@
             justify-content: center;
             margin-left: 8px;
         }
-
-        /* ========================================
-           ТОВАРИ
-        ======================================== */
         .product-panel {
             flex: 1;
             display: flex;
@@ -228,10 +205,6 @@
             margin-top: 20px;
             color: #aaa;
         }
-
-        /* ========================================
-           МОДАЛЬНІ ВІКНА
-        ======================================== */
         .modal, .image-modal, .cart-modal {
             display: none;
             position: fixed;
@@ -292,10 +265,6 @@
             cursor: pointer;
         }
         .close:hover { transform: rotate(90deg); }
-
-        /* ========================================
-           ФОРМА ДОСТАВКИ
-        ======================================== */
         select, input {
             width: 100%;
             padding: 8px;
@@ -316,43 +285,6 @@
             margin: -3px 0 6px;
             display: none;
         }
-        .map-button {
-            background: #000;
-            color: #FFF;
-            border: 2px solid #FFF;
-            padding: 8px 15px;
-            margin: 6px 0;
-            cursor: pointer;
-            font-size: 12px;
-        }
-        .map-button:hover {
-            background: #FFF;
-            color: #000;
-        }
-        .search-container { position: relative; }
-        .search-results, .postomat-list {
-            position: absolute;
-            top: 100%; left: 0; right: 0;
-            background: #000;
-            border: 2px solid #FFF;
-            max-height: 160px;
-            overflow-y: auto;
-            z-index: 10;
-            display: none;
-        }
-        .search-result-item, .postomat-item {
-            padding: 8px;
-            cursor: pointer;
-            border-bottom: 1px solid rgba(255,255,255,0.3);
-            transition: background 0.2s;
-        }
-        .search-result-item:hover, .postomat-item:hover {
-            background: rgba(255,255,255,0.2);
-        }
-
-        /* ========================================
-           АДАПТИВНІСТЬ
-        ======================================== */
         @media (max-width: 768px) {
             .title { font-size: 36px; }
             .sidebar { width: 180px; }
@@ -370,13 +302,9 @@
     </style>
 </head>
 <body>
-    <!-- ЗАГОЛОВОК -->
     <div class="title">VIZMU SOBI</div>
     <canvas id="spaceCanvas"></canvas>
-
-    <!-- ОСНОВНИЙ КОНТЕЙНЕР -->
     <div class="main-container">
-        <!-- БОКОВА ПАНЕЛЬ -->
         <nav class="sidebar">
             <button class="category-btn active" data-category="Всі">Всі товари</button>
             <button class="category-btn" data-category="Штани">Штани</button>
@@ -384,19 +312,64 @@
             <button class="category-btn" data-category="Пончо">Пончо</button>
             <button class="category-btn" data-category="Одеяла">Одеяла</button>
         </nav>
-
-        <!-- КОНТЕНТ -->
         <div class="content">
             <div class="cart-summary">
                 <span>Корзина: <span id="cartTotal">0 грн</span></span>
                 <button class="cart-btn" onclick="openCart()">Корзина <span class="cart-count" id="cartCount">0</span></button>
             </div>
-            <div class="product-panel" id="productPanel"></div>
+            <div class="product-panel" id="productPanel">
+                <div class="product-card">
+                    <div class="product-image" style="background-image:url('https://i.postimg.cc/xT2TB5sw/de.webp')" onclick="showFullImage('https://i.postimg.cc/xT2TB5sw/de.webp')"></div>
+                    <div class="product-info">
+                        <h3>Сорочка біла, Primark</h3>
+                        <p>Ціна: 300 грн</p>
+                        <button class="add-to-cart" onclick="addToCart({&quot;name&quot;:&quot;Сорочка біла, Primark&quot;,&quot;price&quot;:300,&quot;image&quot;:&quot;https://i.postimg.cc/xT2TB5sw/de.webp&quot;,&quot;category&quot;:&quot;Пончо&quot;})">ДОДАТИ</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background-image:url('https://i.postimg.cc/Zqd51QSz/3dwed.webp')" onclick="showFullImage('https://i.postimg.cc/Zqd51QSz/3dwed.webp')"></div>
+                    <div class="product-info">
+                        <h3>Кофта чоловіча, XL</h3>
+                        <p>Ціна: 299 грн</p>
+                        <button class="add-to-cart" onclick="addToCart({&quot;name&quot;:&quot;Кофта чоловіча, XL&quot;,&quot;price&quot;:299,&quot;image&quot;:&quot;https://i.postimg.cc/Zqd51QSz/3dwed.webp&quot;,&quot;category&quot;:&quot;Кофти&quot;})">ДОДАТИ</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background-image:url('https://i.postimg.cc/8cPDPKq6/dd.webp')" onclick="showFullImage('https://i.postimg.cc/8cPDPKq6/dd.webp')"></div>
+                    <div class="product-info">
+                        <h3>Джинси на хлопчика 10-11 років</h3>
+                        <p>Ціна: 315 грн</p>
+                        <button class="add-to-cart" onclick="addToCart({&quot;name&quot;:&quot;Джинси на хлопчика 10-11 років&quot;,&quot;price&quot;:315,&quot;image&quot;:&quot;https://i.postimg.cc/8cPDPKq6/dd.webp&quot;,&quot;category&quot;:&quot;Штани&quot;})">ДОДАТИ</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background-image:url('https://i.postimg.cc/kMhLbgSw/ee.webp')" onclick="showFullImage('https://i.postimg.cc/kMhLbgSw/ee.webp')"></div>
+                    <div class="product-info">
+                        <h3>Спідниця-шорти на дівчинку 8-9 років</h3>
+                        <p>Ціна: 199 грн</p>
+                        <button class="add-to-cart" onclick="addToCart({&quot;name&quot;:&quot;Спідниця-шорти на дівчинку 8-9 років&quot;,&quot;price&quot;:199,&quot;image&quot;:&quot;https://i.postimg.cc/kMhLbgSw/ee.webp&quot;,&quot;category&quot;:&quot;Пончо&quot;})">ДОДАТИ</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background-image:url('https://i.postimg.cc/BbGpxRqc/dws.webp')" onclick="showFullImage('https://i.postimg.cc/BbGpxRqc/dws.webp')"></div>
+                    <div class="product-info">
+                        <h3>Кофта на хлопчика 10-11 років</h3>
+                        <p>Ціна: 245 грн</p>
+                        <button class="add-to-cart" onclick="addToCart({&quot;name&quot;:&quot;Кофта на хлопчика 10-11 років&quot;,&quot;price&quot;:245,&quot;image&quot;:&quot;https://i.postimg.cc/BbGpxRqc/dws.webp&quot;,&quot;category&quot;:&quot;Кофти&quot;})">ДОДАТИ</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background-image:url('https://i.postimg.cc/LsvNkhGW/f.webp')" onclick="showFullImage('https://i.postimg.cc/LsvNkhGW/f.webp')"></div>
+                    <div class="product-info">
+                        <h3>Зелене Одеяло</h3>
+                        <p>Ціна: 760 грн</p>
+                        <button class="add-to-cart" onclick="addToCart({&quot;name&quot;:&quot;Зелене Одеяло&quot;,&quot;price&quot;:760,&quot;image&quot;:&quot;https://i.postimg.cc/LsvNkhGW/f.webp&quot;,&quot;category&quot;:&quot;Одеяла&quot;})">ДОДАТИ</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <!-- МОДАЛЬ КОРЗИНИ -->
-    <div class="cart-modal" id="cartModal">
+    <div class="cart-modal" id="cartModal" style="display: none;">
         <div class="cart-modal-content">
             <span class="close" onclick="closeCart()">×</span>
             <h2>Твоя корзина</h2>
@@ -405,74 +378,76 @@
             <button class="checkout-btn" onclick="proceedToCheckout()" id="checkoutBtn" disabled>ОФОРМИТИ</button>
         </div>
     </div>
-
-    <!-- МОДАЛЬ ДОСТАВКИ -->
-    <div class="modal" id="deliveryModal">
+    <div class="modal" id="deliveryModal" style="display: none;">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">×</span>
             <h2>Оформлення замовлення</h2>
             <form id="deliveryForm">
-                <select id="deliveryMethod">
+                <select id="deliveryMethod" aria-label="Спосіб доставки">
                     <option value="" disabled selected>Спосіб доставки</option>
                     <option value="nova_poshta">Нова Пошта</option>
                     <option value="ukrposhta">Укрпошта</option>
                 </select>
-                <div class="error-message" id="deliveryMethodError">Оберіть спосіб</div>
-
-                <select id="city">
-                    <option value="" disabled selected>Місто</option>
-                    <option>Київ</option>
-                    <option>Львів</option>
-                    <option>Одеса</option>
-                    <option>Житомир</option>
+                <div class="error-message" id="deliveryMethodError">Оберіть спосіб доставки</div>
+                <select id="city" aria-label="Оберіть місто">
+                    <option value="" disabled selected>Оберіть місто</option>
+                    <option value="Київ">Київ</option>
+                    <option value="Львів">Львів</option>
+                    <option value="Одеса">Одеса</option>
+                    <option value="Харків">Харків</option>
+                    <option value="Дніпро">Дніпро</option>
+                    <option value="Запоріжжя">Запоріжжя</option>
+                    <option value="Вінниця">Вінниця</option>
+                    <option value="Хмельницький">Хмельницький</option>
+                    <option value="Чернівці">Чернівці</option>
+                    <option value="Івано-Франківськ">Івано-Франківськ</option>
+                    <option value="Тернопіль">Тернопіль</option>
+                    <option value="Рівне">Рівне</option>
+                    <option value="Луцьк">Луцьк</option>
+                    <option value="Житомир">Житомир</option>
+                    <option value="Черкаси">Черкаси</option>
+                    <option value="Кропивницький">Кропивницький</option>
+                    <option value="Миколаїв">Миколаїв</option>
+                    <option value="Херсон">Херсон</option>
+                    <option value="Суми">Суми</option>
+                    <option value="Чернігів">Чернігів</option>
                 </select>
                 <div class="error-message" id="cityError">Оберіть місто</div>
-
-                <div id="novaPoshtaSection" style="display:none;">
-                    <div class="search-container">
-                        <input type="text" id="postomatSearch" placeholder="Пошук поштомата або адреси">
-                        <div id="searchResults" class="search-results"></div>
-                    </div>
-                    <button type="button" class="map-button" onclick="openMap()">На карті</button>
-                    <div id="postomatList" class="postomat-list"></div>
+                <div id="districtSection" style="display: none;">
+                    <select id="district" aria-label="Оберіть район">
+                        <option value="" disabled selected>Оберіть район (для Житомира)</option>
+                        <option value="zhytomyr">Житомир</option>
+                        <option value="berdychiv">Бердичів</option>
+                        <option value="korosten">Коростень</option>
+                        <option value="novohrad-volynskyi">Новоград-Волинський</option>
+                    </select>
+                    <div class="error-message" id="districtError">Оберіть район</div>
                 </div>
-
                 <div id="ukrposhtaSection" style="display:none;">
-                    <input type="text" id="postalCode" placeholder="Поштовий індекс (наприклад, 01001)">
-                    <div class="error-message" id="postalCodeError">Введіть індекс</div>
+                    <input type="text" id="postalCode" placeholder="Поштовий індекс (наприклад, 01001)" aria-label="Поштовий індекс">
+                    <div class="error-message" id="postalCodeError">Введіть коректний індекс</div>
                 </div>
-
-                <input type="text" id="deliveryAddress" placeholder="Адреса або поштомат">
+                <input type="text" id="deliveryAddress" placeholder="Введіть адресу" aria-label="Адреса доставки">
                 <div class="error-message" id="addressError">Введіть адресу</div>
-
-                <input type="text" id="name" placeholder="Ім'я та прізвище">
-                <div class="error-message" id="nameError">Введіть ім'я</div>
-
-                <input type="tel" id="phone" placeholder="Телефон (+380...)">
-                <div class="error-message" id="phoneError">Невірний телефон</div>
-
+                <input type="text" id="name" placeholder="Ім'я та прізвище" aria-label="Ім'я та прізвище">
+                <div class="error-message" id="nameError">Введіть ім'я та прізвище</div>
+                <input type="tel" id="phone" placeholder="Телефон (+380...)" aria-label="Номер телефону">
+                <div class="error-message" id="phoneError">Формат: +380501234567</div>
                 <button type="button" id="submitButton" onclick="submitDelivery()">ВІДПРАВИТИ</button>
             </form>
         </div>
     </div>
-
-    <!-- МОДАЛЬ ЗОБРАЖЕННЯ -->
     <div class="image-modal" id="imageModal">
         <div class="image-modal-content">
             <span class="image-close" onclick="closeImageModal()">×</span>
             <img id="fullSizeImage" src="" alt="Повне зображення">
         </div>
     </div>
-
     <script>
-        // ========================================
-        // КОСМІЧНИЙ ФОН
-        // ========================================
         const canvas = document.getElementById('spaceCanvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
         const stars = [];
         for (let i = 0; i < 200; i++) {
             stars.push({
@@ -486,7 +461,6 @@
                 opacitySpeed: Math.random() * 0.02 + 0.01
             });
         }
-
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             stars.forEach(s => {
@@ -494,12 +468,10 @@
                 s.y += s.speedY;
                 s.opacity = 0.5 + 0.5 * Math.sin(s.phase);
                 s.phase += s.opacitySpeed;
-
                 if (s.x < 0) s.x = canvas.width;
                 if (s.x > canvas.width) s.x = 0;
                 if (s.y < 0) s.y = canvas.height;
                 if (s.y > canvas.height) s.y = 0;
-
                 ctx.beginPath();
                 ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(255,255,255,${s.opacity})`;
@@ -507,16 +479,11 @@
             });
             requestAnimationFrame(animate);
         }
-
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
         animate();
-
-        // ========================================
-        // ТОВАРИ
-        // ========================================
         const products = [
             { name: 'Сорочка біла, Primark', price: 300, image: 'https://i.postimg.cc/xT2TB5sw/de.webp', category: 'Пончо' },
             { name: 'Кофта чоловіча, XL', price: 299, image: 'https://i.postimg.cc/Zqd51QSz/3dwed.webp', category: 'Кофти' },
@@ -525,17 +492,11 @@
             { name: 'Кофта на хлопчика 10-11 років', price: 245, image: 'https://i.postimg.cc/BbGpxRqc/dws.webp', category: 'Кофти' },
             { name: 'Зелене Одеяло', price: 760, image: 'https://i.postimg.cc/LsvNkhGW/f.webp', category: 'Одеяла' }
         ];
-
-        // ========================================
-        // КОРЗИНА
-        // ========================================
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
         function saveCart() {
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCartUI();
         }
-
         function addToCart(product) {
             const existing = cart.find(i => i.name === product.name);
             if (existing) {
@@ -545,19 +506,16 @@
             }
             saveCart();
         }
-
         function removeFromCart(name) {
             cart = cart.filter(i => i.name !== name);
             saveCart();
         }
-
         function updateCartUI() {
             const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
             document.getElementById('cartTotal').textContent = `${total} грн`;
             document.getElementById('cartCount').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
             document.getElementById('checkoutBtn').disabled = cart.length === 0;
         }
-
         function renderCart() {
             const container = document.getElementById('cartItems');
             const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -569,26 +527,18 @@
             `).join('') : '<p style="color:#aaa">Корзина порожня</p>';
             document.getElementById('cartModalTotal').textContent = `${total} грн`;
         }
-
         function openCart() {
             renderCart();
             document.getElementById('cartModal').style.display = 'flex';
         }
-
         function closeCart() {
             document.getElementById('cartModal').style.display = 'none';
         }
-
         function proceedToCheckout() {
             closeCart();
             openDeliveryModal();
         }
-
-        // ========================================
-        // РЕНДЕР ТОВАРІВ
-        // ========================================
         const productPanel = document.getElementById('productPanel');
-
         function renderProducts(category) {
             const filtered = category === 'Всі' ? products : products.filter(p => p.category === category);
             productPanel.innerHTML = filtered.length > 0 ? filtered.map(p => `
@@ -602,7 +552,6 @@
                 </div>
             `).join('') : '<div class="no-products">Немає товарів у цій категорії</div>';
         }
-
         document.querySelectorAll('.category-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
@@ -610,113 +559,170 @@
                 renderProducts(btn.dataset.category);
             });
         });
-
         renderProducts('Всі');
         updateCartUI();
-
-        // ========================================
-        // ЗОБРАЖЕННЯ
-        // ========================================
         function showFullImage(url) {
             document.getElementById('fullSizeImage').src = url;
             document.getElementById('imageModal').style.display = 'flex';
         }
-
         function closeImageModal() {
             document.getElementById('imageModal').style.display = 'none';
         }
-
-        // ========================================
-        // ДОСТАВКА
-        // ========================================
         let currentOrder = [];
-
         function openDeliveryModal() {
             currentOrder = [...cart];
             document.getElementById('deliveryModal').style.display = 'flex';
+            document.getElementById('deliveryForm').reset();
+            document.getElementById('ukrposhtaSection').style.display = 'none';
+            document.getElementById('districtSection').style.display = 'none';
+            document.getElementById('deliveryAddress').value = '';
+            clearErrors();
+            const savedCity = localStorage.getItem('selectedCity');
+            if (savedCity && document.getElementById('city').querySelector(`option[value="${savedCity}"]`)) {
+                document.getElementById('city').value = savedCity;
+                loadDistricts();
+            }
         }
-
         function closeModal() {
             document.getElementById('deliveryModal').style.display = 'none';
+            clearErrors();
         }
-
-        // ЗАМІНИ НА СВІЙ WEBHOOK
-        const WEBHOOK_URL = 'https://discord.com/api/webhooks/ВАШ_ID/ВАШ_ТОКЕН';
-
+        function clearErrors() {
+            document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+            document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+        }
+        const WEBHOOK_URL = 'https://discord.com/api/webhooks/1422641023657705513/AdZtuDpO8fVTzm5KmQcGwYuRSvhbNztwAOgfvedHaHpEiykbGN4ARKUat5OkJAhID2XH';
         async function submitDelivery() {
             if (!validateForm()) return;
-
             const submitBtn = document.getElementById('submitButton');
             submitBtn.disabled = true;
             submitBtn.textContent = 'Відправка...';
-
-            const items = currentOrder.map(i => `${i.name} (x${i.quantity}) — ${i.price * i.quantity} грн`).join('\n');
+            const items = currentOrder.map(i => `• ${i.name} (x${i.quantity}) — ${i.price * i.quantity} грн`).join('\n');
             const total = currentOrder.reduce((s, i) => s + i.price * i.quantity, 0);
-
+            const deliveryMethod = document.getElementById('deliveryMethod').value;
+            const city = document.getElementById('city').value;
+            const district = city === 'Житомир' ? document.getElementById('district').value : '';
+            const address = document.getElementById('deliveryAddress').value.trim();
+            const postalCode = document.getElementById('postalCode').value.trim();
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            localStorage.setItem('selectedCity', city);
+            if (district) localStorage.setItem('selectedDistrict', district);
+            localStorage.setItem('selectedAddress', address);
             const payload = {
-                content: `НОВЕ ЗАМОВЛЕННЯ\n\nТовари:\n${items}\n\nРазом: ${total} грн\n\nДоставка: ${document.getElementById('deliveryMethod').value === 'nova_poshta' ? 'Нова Пошта' : 'Укрпошта'}\nМісто: ${document.getElementById('city').value}\nАдреса: ${document.getElementById('deliveryAddress').value}\nІм'я: ${document.getElementById('name').value}\nТелефон: ${document.getElementById('phone').value}`
+                content: null,
+                embeds: [{
+                    title: "🛒 НОВЕ ЗАМОВЛЕННЯ",
+                    color: 0x00ff00,
+                    fields: [
+                        { name: "📦 Товари", value: items, inline: false },
+                        { name: "💰 Разом", value: `${total} грн`, inline: false },
+                        { name: "🚚 Спосіб доставки", value: deliveryMethod === 'nova_poshta' ? 'Нова Пошта' : 'Укрпошта', inline: true },
+                        ...(postalCode ? [{ name: "📮 Поштовий індекс", value: postalCode, inline: true }] : []),
+                        { name: "🏙 Місто", value: city, inline: true },
+                        ...(district ? [{ name: "🏘 Район", value: district, inline: true }] : []),
+                        { name: "📍 Адреса", value: address, inline: false },
+                        { name: "👤 ФІО", value: name, inline: true },
+                        { name: "📱 Телефон", value: phone, inline: true }
+                    ],
+                    timestamp: new Date().toISOString()
+                }]
             };
-
             try {
-                await fetch(WEBHOOK_URL, {
+                const response = await fetch(WEBHOOK_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
-                alert('Замовлення відправлено!');
-                cart = [];
-                saveCart();
-                closeModal();
+                if (response.ok) {
+                    alert('✅ Замовлення успішно відправлено!');
+                    cart = [];
+                    saveCart();
+                    closeModal();
+                } else {
+                    throw new Error('Помилка сервера');
+                }
             } catch (e) {
-                alert('Помилка відправки. Спробуйте ще раз.');
+                console.error(e);
+                alert('❌ Помилка відправки. Спробуйте ще раз.');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'ВІДПРАВИТИ';
             }
         }
-
         function validateForm() {
             let isValid = true;
-            const fields = ['deliveryMethod', 'city', 'deliveryAddress', 'name', 'phone'];
-            fields.forEach(id => {
-                const el = document.getElementById(id);
-                const err = document.getElementById(id + 'Error');
+            clearErrors();
+            const requiredFields = [
+                { id: 'deliveryMethod', errorId: 'deliveryMethodError', message: 'Оберіть спосіб доставки' },
+                { id: 'city', errorId: 'cityError', message: 'Оберіть місто' },
+                { id: 'deliveryAddress', errorId: 'addressError', message: 'Введіть адресу' },
+                { id: 'name', errorId: 'nameError', message: "Введіть ім'я та прізвище" },
+                { id: 'phone', errorId: 'phoneError', message: 'Введіть телефон' }
+            ];
+            requiredFields.forEach(field => {
+                const el = document.getElementById(field.id);
+                const err = document.getElementById(field.errorId);
                 if (!el.value.trim()) {
                     el.classList.add('error');
-                    if (err) err.style.display = 'block';
+                    err.textContent = field.message;
+                    err.style.display = 'block';
                     isValid = false;
-                } else {
-                    el.classList.remove('error');
-                    if (err) err.style.display = 'none';
                 }
             });
-
-            const phone = document.getElementById('phone').value;
-            if (!/^\+?\d{10,12}$/.test(phone)) {
+            const city = document.getElementById('city').value;
+            if (city === 'Житомир' && !document.getElementById('district').value) {
+                document.getElementById('district').classList.add('error');
+                document.getElementById('districtError').textContent = 'Оберіть район';
+                document.getElementById('districtError').style.display = 'block';
+                isValid = false;
+            }
+            const deliveryMethod = document.getElementById('deliveryMethod').value;
+            if (deliveryMethod === 'ukrposhta') {
+                const postalCode = document.getElementById('postalCode').value.trim();
+                if (!postalCode || !/^\d{5}$/.test(postalCode)) {
+                    document.getElementById('postalCode').classList.add('error');
+                    document.getElementById('postalCodeError').textContent = 'Введіть коректний 5-значний індекс';
+                    document.getElementById('postalCodeError').style.display = 'block';
+                    isValid = false;
+                }
+            }
+            const phone = document.getElementById('phone').value.replace(/\s/g, '');
+            if (!/^\+?380\d{9}$/.test(phone)) {
                 document.getElementById('phone').classList.add('error');
+                document.getElementById('phoneError').textContent = 'Формат: +380501234567';
                 document.getElementById('phoneError').style.display = 'block';
                 isValid = false;
             }
-
             return isValid;
         }
-
-        document.getElementById('deliveryMethod').addEventListener('change', () => {
-            const method = document.getElementById('deliveryMethod').value;
-            document.getElementById('novaPoshtaSection').style.display = method === 'nova_poshta' ? 'block' : 'none';
-            document.getElementById('ukrposhtaSection').style.display = method === 'ukrposhta' ? 'block' : 'none';
+        document.getElementById('deliveryMethod').addEventListener('change', function() {
+            const method = this.value;
+            const ukrSection = document.getElementById('ukrposhtaSection');
+            clearErrors();
+            ukrSection.style.display = method === 'ukrposhta' ? 'block' : 'none';
+            document.getElementById('deliveryAddress').value = '';
+            document.getElementById('postalCode').value = '';
         });
-
-        function openMap() {
-            window.open('https://novaposhta.ua/', '_blank');
+        document.getElementById('city').addEventListener('change', loadDistricts);
+        function loadDistricts() {
+            const city = document.getElementById('city').value;
+            const districtSection = document.getElementById('districtSection');
+            document.getElementById('deliveryAddress').value = '';
+            clearErrors();
+            if (city === 'Житомир') {
+                districtSection.style.display = 'block';
+                const savedDistrict = localStorage.getItem('selectedDistrict');
+                if (savedDistrict && document.getElementById('district').querySelector(`option[value="${savedDistrict}"]`)) {
+                    document.getElementById('district').value = savedDistrict;
+                }
+            } else {
+                districtSection.style.display = 'none';
+            }
         }
-
-        // ========================================
-        // ІНІЦІАЛІЗАЦІЯ
-        // ========================================
         window.onload = () => {
             updateCartUI();
         };
     </script>
 </body>
-</html>	
+</html>
